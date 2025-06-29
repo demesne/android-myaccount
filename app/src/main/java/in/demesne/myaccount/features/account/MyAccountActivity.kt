@@ -16,7 +16,7 @@ class MyAccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyAccountBinding
     private val viewModel: MyAccountViewModel by viewModels()
-    private lateinit var adapter: AccountListAdapter
+    private lateinit var adapter: MyAccountWebAuthnListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,16 @@ class MyAccountActivity : AppCompatActivity() {
 
     private fun setupUI() {
         // Setup RecyclerView
-        adapter = AccountListAdapter()
+        adapter = MyAccountWebAuthnListAdapter(
+            onAddClick = {
+                // Handle Add button click from header in RecyclerView
+                viewModel.startPasskeyEnrollment(this)
+            },
+            onDeleteClick = { id ->
+                // Handle delete button click for a WebAuthn item
+                viewModel.deleteWebAuthn(id)
+            }
+        )
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MyAccountActivity)
             adapter = this@MyAccountActivity.adapter
@@ -43,11 +52,6 @@ class MyAccountActivity : AppCompatActivity() {
         // Setup refresh
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refreshData()
-        }
-
-        // Setup add passkey button
-        binding.fabAddPasskey.setOnClickListener {
-            viewModel.startPasskeyEnrollment(this)
         }
     }
 

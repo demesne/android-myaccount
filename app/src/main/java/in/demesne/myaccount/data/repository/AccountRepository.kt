@@ -1,6 +1,6 @@
 package `in`.demesne.myaccount.data.repository
 
-import `in`.demesne.myaccount.data.api.AccountDataService
+import `in`.demesne.myaccount.data.api.MyAccountDataService
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnData
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRequest
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRegistrationResponse
@@ -11,13 +11,13 @@ import javax.inject.Singleton
 
 @Singleton
 class AccountRepository @Inject constructor(
-    private val accountDataService: AccountDataService
+    private val myAccountDataService: MyAccountDataService
 ) {
 
     suspend fun getAccountData(token: String): Result<List<WebAuthnData>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = accountDataService.getAccountData("Bearer $token")
+                val response = myAccountDataService.getAccountData("Bearer $token")
                 if (response.isSuccessful && response.body() != null) {
                     Result.success(response.body()!!)
                 } else {
@@ -32,7 +32,7 @@ class AccountRepository @Inject constructor(
     suspend fun startPasskeyEnrollment(token: String): Result<WebAuthnRegistrationResponse> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = accountDataService.startPasskeyEnrollment("Bearer $token")
+                val response = myAccountDataService.startPasskeyEnrollment("Bearer $token")
                 if (response.isSuccessful && response.body() != null) {
                     Result.success(response.body()!!)
                 } else {
@@ -47,11 +47,26 @@ class AccountRepository @Inject constructor(
     suspend fun completePasskeyEnrollment(token: String, credential: WebAuthnRequest): Result<Unit> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = accountDataService.completePasskeyEnrollment("Bearer $token", credential)
+                val response = myAccountDataService.completePasskeyEnrollment("Bearer $token", credential)
                 if (response.isSuccessful) {
                     Result.success(Unit)
                 } else {
                     Result.failure(Exception("Failed to complete passkey enrollment: ${response.message()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+    }
+
+    suspend fun deleteWebAuthn(token: String, id: String): Result<Unit> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = myAccountDataService.deleteWebAuthn("Bearer $token", id)
+                if (response.isSuccessful) {
+                    Result.success(Unit)
+                } else {
+                    Result.failure(Exception("Failed to delete credential: ${response.message()}"))
                 }
             } catch (e: Exception) {
                 Result.failure(e)

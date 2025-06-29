@@ -7,7 +7,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface OktaApiService {
+interface LoginApiService {
     @FormUrlEncoded
     @POST("oauth2/v1/token")
     suspend fun getToken(

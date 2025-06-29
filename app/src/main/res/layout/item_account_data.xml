@@ -41,6 +41,18 @@
             android:textColor="?attr/colorOnSurface"
             tools:text="Description for account item with some additional details and information about the account." />
 
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/delete"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="?attr/colorError"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="-8dp"
+            android:layout_alignParentEnd="true" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
