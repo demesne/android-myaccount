@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import `in`.demesne.myaccount.data.api.AccountDataService
-import `in`.demesne.myaccount.data.api.OktaApiService
+import `in`.demesne.myaccount.data.api.MyAccountDataService
+import `in`.demesne.myaccount.data.api.LoginApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -40,13 +40,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOktaApiService(@Named("okta") retrofit: Retrofit): OktaApiService {
-        return retrofit.create(OktaApiService::class.java)
+    fun provideOktaApiService(@Named("okta") retrofit: Retrofit): LoginApiService {
+        return retrofit.create(LoginApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideAccountDataService(@Named("okta") retrofit: Retrofit): AccountDataService {
-        return retrofit.create(AccountDataService::class.java)
+    fun provideAccountDataService(@Named("okta") retrofit: Retrofit): MyAccountDataService {
+        return retrofit.create(MyAccountDataService::class.java)
     }
 }
