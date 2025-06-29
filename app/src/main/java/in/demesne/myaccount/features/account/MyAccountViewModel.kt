@@ -6,6 +6,7 @@ import androidx.credentials.CreatePublicKeyCredentialRequest
 import androidx.credentials.CreatePublicKeyCredentialResponse
 import androidx.credentials.CredentialManager
 import androidx.credentials.exceptions.CreateCredentialException
+import androidx.credentials.webauthn.PublicKeyCredentialCreationOptions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -82,6 +83,7 @@ class MyAccountViewModel @Inject constructor(
                 return@launch
             }
             val options = optionsResult.getOrNull()!!
+            options.options.rp.id = "oie.tc2.okta.demesne.in"
             val optionsJson = gson.toJson(options.options)
             // 2. Call Android Passkey API (placeholder)
             // TODO: Replace with actual Android Passkey API integration
