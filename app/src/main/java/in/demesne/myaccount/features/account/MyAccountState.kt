@@ -1,6 +1,6 @@
 package `in`.demesne.myaccount.features.account
 
-import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnData
+import `in`.demesne.myaccount.data.models.account.WebAuthnData
 
 sealed class MyAccountState {
     object Loading : MyAccountState()

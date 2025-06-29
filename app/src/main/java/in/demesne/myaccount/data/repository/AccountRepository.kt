@@ -1,7 +1,7 @@
 package `in`.demesne.myaccount.data.repository
 
 import `in`.demesne.myaccount.data.api.MyAccountDataService
-import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnData
+import `in`.demesne.myaccount.data.models.account.WebAuthnData
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRequest
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRegistrationResponse
 import kotlinx.coroutines.Dispatchers

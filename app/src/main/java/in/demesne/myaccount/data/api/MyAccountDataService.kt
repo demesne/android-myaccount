@@ -1,6 +1,6 @@
 package `in`.demesne.myaccount.data.api
 
-import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnData
+import `in`.demesne.myaccount.data.models.account.WebAuthnData
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRequest
 import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnRegistrationResponse
 import retrofit2.Response

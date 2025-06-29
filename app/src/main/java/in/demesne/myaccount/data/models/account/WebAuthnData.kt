@@ -1,4 +1,4 @@
-package `in`.demesne.myaccount.data.models.account.webauthn
+package `in`.demesne.myaccount.data.models.account
 
 data class WebAuthnData(
     val id: String,

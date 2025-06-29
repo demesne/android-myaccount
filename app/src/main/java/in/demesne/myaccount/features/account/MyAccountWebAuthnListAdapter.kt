@@ -3,7 +3,7 @@ package `in`.demesne.myaccount.features.account
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import `in`.demesne.myaccount.data.models.account.webauthn.WebAuthnData
+import `in`.demesne.myaccount.data.models.account.WebAuthnData
 import `in`.demesne.myaccount.databinding.ItemAccountDataBinding
 import `in`.demesne.myaccount.databinding.ItemAccountHeaderBinding
 import android.view.View
