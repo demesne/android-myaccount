@@ -14,17 +14,13 @@ class AuthRepository @Inject constructor(
 ) {
     companion object {
         private const val CLIENT_ID = "0oafkco4d2UrtLrVI0w6"
-        private const val CLIENT_SECRET = "v_sbvSncNNzwpVcKD4SsHbCYe0assag0_WlPvOtJBQS98qXgcWBw50RLeS2in9sq"
     }
 
     suspend fun authenticateWithOkta(username: String, password: String): Result<OktaTokenResponse> {
         return withContext(Dispatchers.IO) {
             try {
-                val credentials = "$CLIENT_ID:$CLIENT_SECRET"
-                val basicAuth = "Basic " + Base64.encodeToString(credentials.toByteArray(), Base64.NO_WRAP)
-
                 val response = loginApiService.getToken(
-                    basicAuth = basicAuth,
+                    clientId = CLIENT_ID,
                     grantType = "password",
                     username = username,
                     password = password,

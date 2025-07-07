@@ -11,7 +11,7 @@ interface LoginApiService {
     @FormUrlEncoded
     @POST("oauth2/v1/token")
     suspend fun getToken(
-        @Header("Authorization") basicAuth: String,
+        @Field("client_id") clientId: String,
         @Field("grant_type") grantType: String,
         @Field("username") username: String,
         @Field("password") password: String,
