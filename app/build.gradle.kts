@@ -14,9 +14,18 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("/${System.getProperty("user.home")}/.android/my-release-key.jks")
+            storePassword = "my-password"
+            keyPassword = "my-password"
+            keyAlias = "my-key-alias"
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -28,6 +37,9 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 
@@ -46,8 +58,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 
     // Networking
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.google.code.gson:gson:2.13.1")

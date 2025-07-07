@@ -91,8 +91,8 @@ class MyAccountViewModel @Inject constructor(
             val credential: PublicKeyCredential = gson.fromJson(credentialJson.registrationResponseJson, PublicKeyCredential::class.java)
 
             val webAuthnRequest = WebAuthnRequest(
-                attestation = credential.response.attestationObject,
-                clientData = credential.response.clientDataJSON,
+                attestation = base64ToBase64Url(credential.response.attestationObject),
+                clientData = base64ToBase64Url(credential.response.clientDataJSON),
                 transports = credential.transports.toString(),
                 clientExtensions = credential.clientExtensionResults.toString()
             )
@@ -107,6 +107,12 @@ class MyAccountViewModel @Inject constructor(
             // 4. Refresh the list
             loadAccountData()
         }
+    }
+
+    private fun base64ToBase64Url(base64: String): String {
+        return base64.replace("+", "-")
+            .replace("/", "_")
+            .replace("=", "")
     }
 
     // Placeholder for Android Passkey API integration
